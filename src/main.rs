@@ -1,18 +1,9 @@
-fn main() {
-    println!("Hello, world!");
-}
+use std::net::TcpListener;
 
-#[allow(dead_code)]
-fn add(a: i32, b: i32) -> i32 {
-    a + b
-}
+use zero2prod::run;
 
-#[cfg(test)]
-mod tests {
-    use super::*;
-
-    #[test]
-    fn test_add() {
-        assert_eq!(add(1, 2), 3);
-    }
+#[actix_web::main]
+async fn main() -> std::io::Result<()> {
+    let listener = TcpListener::bind("127.0.0.1:8000")?;
+    run(listener)?.await
 }
